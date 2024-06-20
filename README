@@ -1,57 +1,15 @@
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
-import matplotlib.pyplot as plt
+TASK 1:House Price Prediction using Linear Regression
 
-# Load the dataset
-data = pd.read_csv('data.csv')
+## Overview
+This repository contains the implementation of a linear regression model for predicting house prices based on square footage, bedrooms, and bathrooms. The project is part of the Machine Learning internship at Prodigy InfoTech.
 
-# Display the first few rows of the dataset
-print("First few rows of the dataset:")
-print(data.head())
+## Description
+The task involves:
+- Analyzing a dataset containing house information.
+- Implementing a linear regression algorithm to predict house prices.
+- Exploring relationships between square footage, bedrooms, bathrooms, and prices.
+- Evaluating model performance using appropriate metrics.
 
-# Display all column names
-print("Column names in the dataset:")
-print(data.columns)
-
-# Check if necessary columns are present
-required_columns = ['sqft_living', 'bedrooms', 'bathrooms', 'price']
-if not all(col in data.columns for col in required_columns):
-    raise ValueError(f"Dataset must contain the following columns: {required_columns}")
-
-# Drop rows with missing values in the required columns
-data = data.dropna(subset=required_columns)
-
-# Features and target variable
-X = data[['sqft_living', 'bedrooms', 'bathrooms']]
-y = data['price']
-
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Initialize and train the model
-model = LinearRegression()
-model.fit(X_train, y_train)
-
-# Print the coefficients
-print("Coefficients:", model.coef_)
-print("Intercept:", model.intercept_)
-
-# Predict the prices on the test set
-y_pred = model.predict(X_test)
-
-# Calculate and print the mean squared error and R^2 score
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-
-print("Mean Squared Error:", mse)
-print("R^2 Score:", r2)
-
-# Plot actual vs predicted prices
-plt.scatter(y_test, y_pred)
-plt.xlabel("Actual Prices")
-plt.ylabel("Predicted Prices")
-plt.title("Actual vs Predicted Prices")
-plt.show()
+## Files
+- house_price_prediction.ipynb: Jupyter Notebook with the code implementation.
+- dataset.csv: Dataset used for training and testing the model.
